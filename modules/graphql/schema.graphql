@@ -1,0 +1,95 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type IOTDATA {
+  id: String!
+  messageId: String
+  payload: AWSJSON
+  unixTimestamp: Long!
+}
+
+type IOTDATAConnection {
+  items: [IOTDATA]
+  nextToken: String
+}
+
+type Mutation {
+  deleteIOTDATA(input: DeleteIOTDATAInput!): IOTDATA
+}
+
+type Query {
+  getIOTDATA(id: String!, unixTimestamp: Long!): IOTDATA
+  listIOTDATAS(
+    filter: TableIOTDATAFilterInput
+    limit: Int
+    nextToken: String
+  ): IOTDATAConnection
+  getLatestIOTDATA(id: String!, limit: Int): IOTDATAConnection
+}
+
+input DeleteIOTDATAInput {
+  id: String!
+  datatime: Int!
+}
+
+input TableIOTDATAFilterInput {
+  id: TableStringFilterInput
+  unixTimestamp: TableLongFilterInput
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableLongFilterInput {
+  between: [Long]
+  contains: Long
+  eq: Long
+  ge: Long
+  gt: Long
+  le: Long
+  lt: Long
+  ne: Long
+  notContains: Long
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
